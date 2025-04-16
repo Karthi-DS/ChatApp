@@ -1,0 +1,191 @@
+/* src/components/Chat.css */
+
+.chat-container {
+    max-width: 700px; /* Slightly wider */
+    margin: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    border-radius: 0.5rem; /* Rounded corners for the card */
+    overflow: hidden; /* Ensure children respect rounded corners */
+  }
+  
+  .chat-header {
+    background: linear-gradient(45deg, #0d6efd, #0dcaf0); /* Gradient header */
+    padding: 0.8rem 1rem; /* Adjust padding */
+  }
+  
+  .chat-header h5 {
+    font-weight: 600;
+  }
+  
+  .chat-body {
+    flex-grow: 1;
+    overflow-y: auto; /* Use 'auto' for scrolling */
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white fallback */
+    background-size: cover; /* Or 'contain' or specific size */
+    background-position: center center;
+    background-repeat: no-repeat;
+    scroll-behavior: smooth; /* Smooth scrolling */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Space between messages */
+  }
+  
+  /* Style message bubbles */
+  .message-bubble-container {
+    display: flex;
+    opacity: 0; /* Start hidden for animation */
+    animation: fadeInSlideUp 0.4s ease-out forwards; /* Animation */
+  }
+  
+  .message-bubble {
+    padding: 0.6rem 1rem; /* Message padding */
+    border-radius: 1rem; /* More rounded bubbles */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 75%;
+    position: relative;
+    min-width: 90px; /* Ensure space for timestamp */
+    word-wrap: break-word;
+  }
+  
+  /* User's message bubble */
+  .message-bubble.user {
+    background-color: #0d6efd; /* Primary blue */
+    color: white;
+    border-bottom-right-radius: 0.25rem; /* Slight variation */
+  }
+  
+  /* Other users' message bubble */
+  .message-bubble.other {
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #eee;
+    border-bottom-left-radius: 0.25rem; /* Slight variation */
+  }
+  
+  .message-author {
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    color: #555; /* Different color for author on white bg */
+  }
+  .message-bubble.user .message-author {
+      color: rgba(255, 255, 255, 0.8); /* Lighter author on user bg */
+  }
+  
+  
+  .message-content {
+    margin-bottom: 0;
+    padding-right: 50px; /* Space for timestamp */
+    font-size: 0.95rem;
+  }
+  
+  .message-time {
+    position: absolute;
+    bottom: 5px; /* Adjusted position */
+    right: 10px; /* Adjusted position */
+    font-size: 0.65rem; /* Smaller time */
+    color: #888; /* Default time color */
+  }
+  
+  /* Timestamp color inside user's bubble */
+  .message-bubble.user .message-time {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  
+  .chat-footer {
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .chat-footer .form-control {
+    width: 200px;
+    border-radius: 1.5rem 0 0 1.5rem; /* Rounded input left */
+    border-right: none; /* Remove border between input and button */
+    padding: 0.5rem 1rem;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  .chat-footer .form-control:focus {
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Focus effect */
+      z-index: 1; /* Ensure focus ring is on top */
+  }
+  
+  
+  .chat-footer .btn {
+    border-radius: 0 1.5rem 1.5rem 0;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    /* --- Change color --- */
+    background-color: #005cbf; /* A darker, more saturated blue */
+    border-color: #005cbf;    /* Match border to background */
+    color: white; /* Ensure text/icon is white */
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
+  
+  /* Adjust hover state if needed */
+  .chat-footer .btn:hover {
+    background-color: #004a99; /* Even darker on hover */
+    border-color: #004a99;
+  }
+  
+  /* ... rest of the styles ... */
+  
+  /* Optional: Enhance hover/focus states */
+  .chat-footer .btn:hover {
+    /* Bootstrap usually handles this, but you can customize */
+    /* background-color: #0a58ca; */
+    /* border-color: #0a53be; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slightly larger shadow on hover */
+  }
+  
+  /* Optional: Slightly improve disabled look */
+  .chat-footer .btn:disabled {
+    /* Bootstrap styles this, but you could override */
+    /* Example: Ensure no shadow when disabled */
+    box-shadow: none;
+    border-color: transparent; /* Remove border in disabled state if using one */
+  }
+  
+  
+  .chat-footer .btn .bi {
+    font-size: 1.1rem; /* Icon size */
+  }
+  
+  
+  
+  /* Animation for new messages */
+  @keyframes fadeInSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Style scrollbar (optional, webkit browsers) */
+  .chat-body::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .chat-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
+  
+  .chat-body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  
+  .chat-body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
